@@ -49,7 +49,7 @@ def run_driver(driver_num, queue):
 
 
 print("running")
-num_drivers = 2  # Number of drivers you want to run
+num_drivers = 1  # Number of drivers you want to run
 
 threads = []
 result_queue = Queue()  # Create a queue to store the results

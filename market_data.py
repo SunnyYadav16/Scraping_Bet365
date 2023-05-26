@@ -200,7 +200,7 @@ def get_main_market_data(driver, user_range):
     print(TOTAL_COUNT)
     range_data = TOTAL_COUNT // 2
 
-    selector = selector[:range_data] if user_range else selector[range_data:]
+    # selector = selector[:range_data] if user_range else selector[range_data:]
     print(user_range)
     match_name = driver.find_element(
         By.CSS_SELECTOR, ".sph-EventHeader_Label, .sph-EventHeader_HeaderText"
@@ -210,7 +210,7 @@ def get_main_market_data(driver, user_range):
     # data_set
     main_data = []
     multi_market_data = []
-    for i, value in enumerate(selector):
+    for i in range(TOTAL_COUNT):
         if i >= 1:
             selector, TOTAL_COUNT = selector_finder(
                 driver,
@@ -218,7 +218,7 @@ def get_main_market_data(driver, user_range):
                 "src-ParticipantFixtureDetailsHigher_LhsContainerInner",
                 True,
             )
-            selector = selector[:range_data] if user_range else selector[range_data:]
+            # selector = selector[:range_data] if user_range else selector[range_data:]
         click_on_match_data(driver, selector, i)
         open_new_tab(driver, driver.current_url)
         match_wise_data, match_key = game_data(driver)
