@@ -45,7 +45,6 @@ def run_driver(driver_num, queue):
     except Exception as e:
         # Set the exception flag and propagate the exception
         exception_flag.set()
-        raise e
 
 
 print("running")
@@ -78,4 +77,4 @@ else:
         match_data.append(result.get("result_value")[1])
         results.append(result)
 
-export_match_data(match_name, match_data)
+    export_match_data(match_name, match_data)
