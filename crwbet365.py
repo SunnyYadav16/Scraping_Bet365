@@ -2,6 +2,7 @@ import datetime
 import json
 from multiprocessing import Queue
 from threading import Thread
+import threading
 from base import driver_code
 from market_data import get_main_market_data
 
@@ -24,6 +25,10 @@ def export_match_data(match_name, match_data):
         json.dump(data, file, indent=4)
 
 
+# Exception flag
+exception_flag = threading.Event()
+
+
 def run_driver(driver_num, queue):
     try:
         driver = driver_code(driver_num)  # You can use any Selenium WebDriver here
@@ -38,31 +43,39 @@ def run_driver(driver_num, queue):
 
         queue.put(result)  # Put the result in the queue
     except Exception as e:
+        # Set the exception flag and propagate the exception
+        exception_flag.set()
         raise e
 
 
-if __name__ == "__main__":
-    num_drivers = 2  # Number of drivers you want to run
+print("running")
+num_drivers = 2  # Number of drivers you want to run
 
-    threads = []
-    result_queue = Queue()  # Create a queue to store the results
+threads = []
+result_queue = Queue()  # Create a queue to store the results
 
-    for i in range(num_drivers):
-        t = Thread(target=run_driver, args=(i, result_queue))
-        threads.append(t)
-        t.start()
+for i in range(num_drivers):
+    t = Thread(target=run_driver, args=(i, result_queue))
+    threads.append(t)
+    t.start()
 
-    for thread in threads:
-        thread.join()
+for thread in threads:
+    thread.join()
 
-    # Retrieve the results from the queue
-    results = []
-    match_name = ""
-    match_data = []
+results = []
+match_name = ""
+match_data = []
+# Check if any exception occurred in any of the threads
+if exception_flag.is_set():
+    # Perform any necessary cleanup or error handling
+    print("An exception occurred in one of the threads. Terminating the script.")
+
+# Retrieve the results from the queue
+else:
     while not result_queue.empty():
         result = result_queue.get()
         match_name = result.get("result_value")[0]
         match_data.append(result.get("result_value")[1])
         results.append(result)
 
-    export_match_data(match_name, match_data)
+export_match_data(match_name, match_data)
