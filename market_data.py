@@ -212,12 +212,7 @@ def get_main_market_data(driver, user_range):
     multi_market_data = []
     for i in range(TOTAL_COUNT):
         if i >= 1:
-            selector, TOTAL_COUNT = selector_finder(
-                driver,
-                By.CLASS_NAME,
-                "src-ParticipantFixtureDetailsHigher_LhsContainerInner",
-                True,
-            )
+            selector, TOTAL_COUNT = get_match_counter(driver)
             # selector = selector[:range_data] if user_range else selector[range_data:]
         click_on_match_data(driver, selector, i)
         open_new_tab(driver, driver.current_url)
@@ -246,4 +241,5 @@ def get_main_market_data(driver, user_range):
 
         open_new_tab(driver, driver.current_url)
         main_data[i].get(match_key)["multi_market_data"] = multi_market_data[i]
+
     return match_name, main_data

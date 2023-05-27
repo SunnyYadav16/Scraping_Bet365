@@ -104,9 +104,10 @@ def match_selector(driver):
 
 
 def get_match_counter(driver):
+    time.sleep(2)
     return selector_finder(
         driver,
-        By.CLASS_NAME,
-        "src-ParticipantFixtureDetailsHigher_LhsContainerInner",
+        By.CSS_SELECTOR,
+        ".src-ParticipantFixtureDetailsHigher_LhsContainerInner:not(:has(.pi-ScoreVariantSingleParticipant5))",
         True,
     )
