@@ -99,7 +99,7 @@ def match_selector(driver):
     print("match_selector")
     print("-"*50)
     time.sleep(10)
-    driver.save_screenshot("/home/ubuntu/screenshot.png")
+    driver.save_screenshot("/home/ubuntu//Scraping_Bet365/scree.png")
     print("-"*50)
     driver.find_element(
         By.CSS_SELECTOR,
