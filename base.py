@@ -96,7 +96,7 @@ def remove_cookies(driver):
 def match_selector(driver): 
     driver.find_element(
         By.CSS_SELECTOR,
-        ".crm-RibbonItemLeague_Afl",
+        ".cis-PopularIconSmall_Afl",
     ).click()
 
     # Open a new tab
