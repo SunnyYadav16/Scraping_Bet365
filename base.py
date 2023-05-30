@@ -50,9 +50,10 @@ def driver_code(driver_num):
     )
 
     options.add_argument("--disable-popup-blocking")
-    driver.execute_script(
-        """setTimeout(() => window.location.href="https://www.bet365.com.au", 100)"""
-    )
+#     driver.execute_script(
+#         """setTimeout(() => window.location.href="https://www.bet365.com.au", 100)"""
+#     )
+    driver.get("www.google.com")
     
     driver.set_window_size(390, 844)
     print("setWindowSize")
