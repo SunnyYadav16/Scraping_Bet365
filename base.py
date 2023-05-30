@@ -91,10 +91,10 @@ def remove_cookies(driver):
     driver.find_element(By.CLASS_NAME, "ccm-CookieConsentPopup_Accept").click()
 
 
-def match_selector(driver):
+def match_selector(driver): 
     driver.find_element(
-        By.XPATH,
-        "/html/body/div[1]/div/div[4]/div[3]/div/div/div/div/div[1]/div/div/div/div[1]/div/div/div[2]/div/div[1]/div[1]/div",
+        By.CSS_SELECTOR,
+        ".crm-RibbonItemLeague_Afl",
     ).click()
 
     # Open a new tab
