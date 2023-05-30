@@ -57,6 +57,7 @@ def driver_code(driver_num):
     
     driver.set_window_size(390, 844)
     print("setWindowSize")
+    driver.save_screenshot("/home/ubuntu/Scraping_Bet365/scree.png")
     time.sleep(5)
     remove_loader(driver)
     return driver
