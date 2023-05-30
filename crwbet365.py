@@ -44,6 +44,7 @@ def run_driver(driver_num, queue):
         queue.put(result)  # Put the result in the queue
     except Exception as e:
         # Set the exception flag and propagate the exception
+        print(e)
         exception_flag.set()
 
 
