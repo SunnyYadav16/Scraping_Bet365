@@ -97,7 +97,7 @@ def remove_cookies(driver):
 def match_selector(driver):
     print("match_selector")
     print("-"*50)
-#     print(driver.page_source)
+    driver.save_screenshot("/home/ubuntu/screenshot.png")
     print("-"*50)
     driver.find_element(
         By.CSS_SELECTOR,
