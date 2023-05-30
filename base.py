@@ -96,6 +96,9 @@ def remove_cookies(driver):
 
 def match_selector(driver):
     print("match_selector")
+    print("-"*50)
+    print(driver.page_source)
+    print("-"*50)
     driver.find_element(
         By.CSS_SELECTOR,
         ".crm-RibbonItemLeague_Afl",
