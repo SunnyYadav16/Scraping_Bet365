@@ -53,8 +53,9 @@ def driver_code(driver_num):
     driver.execute_script(
         """setTimeout(() => window.location.href="https://www.bet365.com.au", 100)"""
     )
-
+    
     driver.set_window_size(390, 844)
+    print("setWindowSize")
     time.sleep(5)
     remove_loader(driver)
     return driver
@@ -93,7 +94,8 @@ def remove_cookies(driver):
     driver.find_element(By.CLASS_NAME, "ccm-CookieConsentPopup_Accept").click()
 
 
-def match_selector(driver): 
+def match_selector(driver):
+    print("match_selector")
     driver.find_element(
         By.CSS_SELECTOR,
         ".crm-RibbonItemLeague_Afl",
