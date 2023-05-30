@@ -37,8 +37,8 @@ def driver_code(driver_num):
     options.add_argument("disable-blink-features=AutomationControlled")
 
     driver = webdriver.Chrome(
+        '/home/ubuntu/Scraping_Bet365/chromedriver',
         options=options,
-        service=Service(ChromeDriverManager().install()),
         desired_capabilities=Capabilities,
     )
     driver.execute_script(
