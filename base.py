@@ -53,7 +53,7 @@ def driver_code(driver_num):
 #     driver.execute_script(
 #         """setTimeout(() => window.location.href="https://www.bet365.com.au", 100)"""
 #     )
-    driver.get("www.google.com")
+    driver.get("https://www.google.com")
     
     driver.set_window_size(390, 844)
     print("setWindowSize")
@@ -99,7 +99,7 @@ def match_selector(driver):
     print("match_selector")
     print("-"*50)
     time.sleep(10)
-    driver.save_screenshot("/home/ubuntu//Scraping_Bet365/scree.png")
+    driver.save_screenshot("/home/ubuntu/Scraping_Bet365/scree.png")
     print("-"*50)
     driver.find_element(
         By.CSS_SELECTOR,
