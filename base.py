@@ -53,7 +53,7 @@ def driver_code(driver_num):
 #     driver.execute_script(
 #         """setTimeout(() => window.location.href="https://www.bet365.com.au", 100)"""
 #     )
-    driver.get("https://www.google.com")
+    driver.get("https://www.bet365.com.au")
     
     driver.set_window_size(390, 844)
     print("setWindowSize")
