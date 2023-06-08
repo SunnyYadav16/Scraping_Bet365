@@ -76,9 +76,7 @@ def selector_finder(driver, selector_type, selector, flag=False):
 def open_new_tab(driver, url):
     print("Opening new tab")
     driver.execute_script(
-        f"""
-        window.open('{url}', "_blank");
-    """
+        f"""window.open('https://www.bet365.com.au/#/AC/B36/C20856562/D48/E1/F36/', "_blank");"""
     )
 
     # driver.find_element(
