@@ -1,12 +1,12 @@
 import time
-from selenium import webdriver
 
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
+from selenium import webdriver
 from selenium.webdriver import ChromeOptions
 from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.common.by import By
+from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.ui import WebDriverWait
 from webdriver_manager.chrome import ChromeDriverManager
 
 # from selenium.webdriver.common.action_chains import ActionChains
@@ -37,7 +37,7 @@ def driver_code(driver_num):
     options.add_argument("disable-blink-features=AutomationControlled")
 
     driver = webdriver.Chrome(
-        '/home/ubuntu/Scraping_Bet365/chromedriver',
+        "/home/ubuntu/Scraping_Bet365/chromedriver",
         options=options,
         desired_capabilities=Capabilities,
     )
@@ -50,11 +50,11 @@ def driver_code(driver_num):
     )
 
     options.add_argument("--disable-popup-blocking")
-#     driver.execute_script(
-#         """setTimeout(() => window.location.href="https://www.bet365.com.au", 100)"""
-#     )
+    #     driver.execute_script(
+    #         """setTimeout(() => window.location.href="https://www.bet365.com.au", 100)"""
+    #     )
     driver.get("https://www.bet365.com.au")
-    
+
     driver.set_window_size(390, 844)
     print("setWindowSize")
     driver.save_screenshot("/home/ubuntu/Scraping_Bet365/scree.png")
@@ -98,10 +98,10 @@ def remove_cookies(driver):
 
 def match_selector(driver):
     print("match_selector")
-    print("-"*50)
+    print("-" * 50)
     time.sleep(10)
     driver.save_screenshot("/home/ubuntu/Scraping_Bet365/scree.png")
-    print("-"*50)
+    print("-" * 50)
     driver.find_element(
         By.CSS_SELECTOR,
         ".crm-RibbonItemLeague_Afl",
@@ -118,6 +118,9 @@ def get_match_counter(driver):
     return selector_finder(
         driver,
         By.CSS_SELECTOR,
-        ".src-ParticipantFixtureDetailsHigher_LhsContainerInner:not(:has(.pi-ScoreVariantSingleParticipant5))",
+        ".src-ParticipantFixtureDetailsHigher_LhsContainerInner",
         True,
     )
+
+
+# ".src-ParticipantFixtureDetailsHigher_LhsContainerInner:not(:has(.pi-ScoreVariantSingleParticipant5))",
