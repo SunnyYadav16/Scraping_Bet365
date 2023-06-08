@@ -115,6 +115,7 @@ def match_selector(driver):
 
 def get_match_counter(driver):
     time.sleep(2)
+    driver.save_screenshot("/home/ubuntu/Scraping_Bet365/screen1.png")
     return selector_finder(
         driver,
         By.CSS_SELECTOR,
