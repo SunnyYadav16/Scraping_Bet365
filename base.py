@@ -75,9 +75,15 @@ def selector_finder(driver, selector_type, selector, flag=False):
 
 def open_new_tab(driver, url):
     print("Opening new tab")
+    # driver.execute_script(
+    #     f"""
+    #     window.open('{url}', "_blank");
+    # """
+    # )
+
     driver.execute_script(
         f"""
-        window.open('{url}', "_blank");
+        window.open('https://www.google.com/', "_blank");
     """
     )
 
