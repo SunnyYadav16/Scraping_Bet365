@@ -1,8 +1,9 @@
 import datetime
 import json
+import threading
 from multiprocessing import Queue
 from threading import Thread
-import threading
+
 from base import driver_code
 from market_data import get_main_market_data
 
@@ -49,33 +50,37 @@ def run_driver(driver_num, queue):
 
 
 print("running")
-num_drivers = 1  # Number of drivers you want to run
+# num_drivers = 1  # Number of drivers you want to run
 
-threads = []
+# threads = []
 result_queue = Queue()  # Create a queue to store the results
 
-for i in range(num_drivers):
-    t = Thread(target=run_driver, args=(i, result_queue))
-    threads.append(t)
-    t.start()
+# for i in range(num_drivers):
+#     t = Thread(target=run_driver, args=(i, result_queue))
+#     threads.append(t)
+#     t.start()
 
-for thread in threads:
-    thread.join()
+# for thread in threads:
+#     thread.join()
+
+run_driver(1, result_queue)
 
 results = []
 match_name = ""
 match_data = []
+
 # Check if any exception occurred in any of the threads
-if exception_flag.is_set():
-    # Perform any necessary cleanup or error handling
-    print("An exception occurred in one of the threads. Terminating the script.")
+# if exception_flag.is_set():
+#     # Perform any necessary cleanup or error handling
+#     print("An exception occurred in one of the threads. Terminating the script.")
 
 # Retrieve the results from the queue
-else:
-    while not result_queue.empty():
-        result = result_queue.get()
-        match_name = result.get("result_value")[0]
-        match_data.append(result.get("result_value")[1])
-        results.append(result)
+# else:
 
-    export_match_data(match_name, match_data)
+while not result_queue.empty():
+    result = result_queue.get()
+    match_name = result.get("result_value")[0]
+    match_data.append(result.get("result_value")[1])
+    results.append(result)
+
+export_match_data(match_name, match_data)
