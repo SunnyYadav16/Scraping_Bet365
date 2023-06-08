@@ -80,7 +80,7 @@ def open_new_tab(driver, url):
         window.open('{url}', "_blank");
     """
     )
-    time.sleep(2)
+    time.sleep(20)
     # driver.close()
     print("Switching to new tab")
     driver.switch_to.window(driver.window_handles[-1])
