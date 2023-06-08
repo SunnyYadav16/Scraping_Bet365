@@ -80,8 +80,9 @@ def open_new_tab(driver, url):
     """
     )
     time.sleep(2)
-    driver.close()
+    # driver.close()
     driver.switch_to.window(driver.window_handles[-1])
+    driver.save_screenshot("/home/ubuntu/Scraping_Bet365/screen2.png")
 
 
 def click_on_match_data(driver, selector, i=0):
