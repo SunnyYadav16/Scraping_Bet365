@@ -3,13 +3,13 @@ import time
 from selenium import webdriver
 from selenium.webdriver import ChromeOptions
 from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
+from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 from webdriver_manager.chrome import ChromeDriverManager
-
-# from selenium.webdriver.common.action_chains import ActionChains
 
 
 def remove_loader(driver):
@@ -74,6 +74,7 @@ def selector_finder(driver, selector_type, selector, flag=False):
 
 
 def open_new_tab(driver, url):
+    print("Opening new tab")
     driver.execute_script(
         f"""
         window.open('{url}', "_blank");
@@ -81,7 +82,10 @@ def open_new_tab(driver, url):
     )
     time.sleep(2)
     # driver.close()
+    print("Switching to new tab")
     driver.switch_to.window(driver.window_handles[-1])
+    print("Switched to new tab")
+
     driver.save_screenshot("/home/ubuntu/Scraping_Bet365/screen2.png")
 
 
