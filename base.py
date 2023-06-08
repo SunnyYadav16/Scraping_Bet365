@@ -75,15 +75,9 @@ def selector_finder(driver, selector_type, selector, flag=False):
 
 def open_new_tab(driver, url):
     print("Opening new tab")
-    # driver.execute_script(
-    #     f"""
-    #     window.open('{url}', "_blank");
-    # """
-    # )
-
     driver.execute_script(
         f"""
-        window.open('https://www.google.com/', "_blank");
+        window.open('{url}', "_blank");
     """
     )
 
@@ -98,7 +92,7 @@ def open_new_tab(driver, url):
     driver.switch_to.window(driver.window_handles[-1])
     print("Switched to new tab")
 
-    driver.save_screenshot("/home/ubuntu/Scraping_Bet365/screen2-4.png")
+    driver.save_screenshot("/home/ubuntu/Scraping_Bet365/screen2-5.png")
 
 
 def click_on_match_data(driver, selector, i=0):
