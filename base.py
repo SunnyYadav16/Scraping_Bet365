@@ -98,7 +98,7 @@ def open_new_tab(driver, url):
     driver.switch_to.window(driver.window_handles[-1])
     print("Switched to new tab")
 
-    driver.save_screenshot("/home/ubuntu/Scraping_Bet365/screen2-3.png")
+    driver.save_screenshot("/home/ubuntu/Scraping_Bet365/screen2-4.png")
 
 
 def click_on_match_data(driver, selector, i=0):
