@@ -4,6 +4,8 @@ import threading
 from multiprocessing import Queue
 from threading import Thread
 
+from selenium.webdriver.support.wait import WebDriverWait
+
 from base import driver_code
 from market_data import get_main_market_data
 
@@ -32,9 +34,11 @@ exception_flag = threading.Event()
 
 def run_driver(driver_num, queue):
     try:
+
         driver = driver_code(driver_num)  # You can use any Selenium WebDriver here
         # Add your automation code for the driver here
-
+        # breakpoint(e)
+        # if driver:
         result = {"result_value": []}
         if driver_num == 0:
             result["result_value"] = get_main_market_data(driver, True)
@@ -42,7 +46,11 @@ def run_driver(driver_num, queue):
             result["result_value"] = get_main_market_data(driver, False)
         driver.quit()
 
-        queue.put(result)  # Put the result in the queue
+        queue.put(result)
+        # breakpoint()
+        # else:
+        #     driver.quit()# Put the result in the queue
+
     except Exception as e:
         # Set the exception flag and propagate the exception
         print(e)

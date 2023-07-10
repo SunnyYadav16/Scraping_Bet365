@@ -19,7 +19,8 @@ def get_sub_data(sub_data_part):
     return [
         sub_element.text
         for sub_element in sub_data_part.find_elements(
-            By.CLASS_NAME, "bbm-BetBuilderParticipant_Odds"
+            # By.CLASS_NAME, "bbm-BetBuilderParticipant_Odds"
+            By.CLASS_NAME, "bbl-BetBuilderParticipant_Odds"
         )
     ]
 
@@ -33,7 +34,8 @@ def multi_sub_menu_data(driver, idx, selector, sub_headling):
     if (
         len(
             driver.find_elements(
-                By.CSS_SELECTOR, ".bbw-FilteredMarketOddsHScroller_LeftButton"
+                # By.CSS_SELECTOR, ".bbw-FilteredMarketOddsHScroller_LeftButton"
+                By.CSS_SELECTOR, ".bbl-FilteredMarketOddsHScroller_LeftButton"
             )
         )
         > 0
@@ -41,35 +43,41 @@ def multi_sub_menu_data(driver, idx, selector, sub_headling):
         for _ in range(
             len(
                 driver.find_elements(
-                    By.CSS_SELECTOR, ".bbw-FilteredMarketOddsHScroller_LeftButton"
+                    # By.CSS_SELECTOR, ".bbw-FilteredMarketOddsHScroller_LeftButton"
+                    By.CSS_SELECTOR, ".bbl-FilteredMarketOddsHScroller_LeftButton"
                 )
             )
             + 1
         ):
             actions.click(
                 driver.find_elements(
-                    By.CSS_SELECTOR, ".bbw-FilteredMarketOddsHScroller_LeftButton"
+                    # By.CSS_SELECTOR, ".bbw-FilteredMarketOddsHScroller_LeftButton"
+                    By.CSS_SELECTOR, ".bbl-FilteredMarketOddsHScroller_LeftButton"
                 )[0]
             )
             actions.perform()
 
     for counter, i in enumerate(selector):
         if (
-            len(selector_finder(driver, By.CSS_SELECTOR, ".bbm-ShowMoreForHScroll"))
+            # len(selector_finder(driver, By.CSS_SELECTOR, ".bbm-ShowMoreForHScroll"))
+            len(selector_finder(driver, By.CSS_SELECTOR, ".bbl-ShowMoreForHScroll"))
             >= 0
             and counter < 1
         ):
             actions = ActionChains(driver)
             actions.move_to_element(
-                selector_finder(driver, By.CSS_SELECTOR, ".bbm-ShowMoreForHScroll")[0]
+                # selector_finder(driver, By.CSS_SELECTOR, ".bbm-ShowMoreForHScroll")[0]
+                selector_finder(driver, By.CSS_SELECTOR, ".bbl-ShowMoreForHScroll")[0]
             )
             actions.click(
-                selector_finder(driver, By.CSS_SELECTOR, ".bbm-ShowMoreForHScroll")[0]
+                # selector_finder(driver, By.CSS_SELECTOR, ".bbm-ShowMoreForHScroll")[0]
+                selector_finder(driver, By.CSS_SELECTOR, ".bbl-ShowMoreForHScroll")[0]
             )
             actions.perform()
             key_data = get_key_data(
                 selector_finder(
-                    driver, By.CSS_SELECTOR, ".bbw-BetBuilderParticipantLabel"
+                    # driver, By.CSS_SELECTOR, ".bbw-BetBuilderParticipantLabel"
+                    driver, By.CSS_SELECTOR, ".bbl-BetBuilderParticipantLabel_Name"
                 )
             )
         heading.append(i.text)
@@ -78,21 +86,24 @@ def multi_sub_menu_data(driver, idx, selector, sub_headling):
                 selector_finder(
                     driver,
                     By.CSS_SELECTOR,
-                    ".bbw-FilteredMarketOddsHScroller_Contents>div",
+                    # ".bbw-FilteredMarketOddsHScroller_Contents>div",
+                    ".bbl-FilteredMarketOddsHScroller_Contents>div",
                 )[counter]
             )
         )
         if (
             len(
                 driver.find_elements(
-                    By.CSS_SELECTOR, ".bbw-FilteredMarketOddsHScroller_RightButton"
+                    # By.CSS_SELECTOR, ".bbw-FilteredMarketOddsHScroller_RightButton"
+                    By.CSS_SELECTOR, ".bbl-FilteredMarketOddsHScroller_RightButton"
                 )
             )
             > 0
         ):
             actions.click(
                 driver.find_elements(
-                    By.CSS_SELECTOR, ".bbw-FilteredMarketOddsHScroller_RightButton"
+                    # By.CSS_SELECTOR, ".bbw-FilteredMarketOddsHScroller_RightButton"
+                    By.CSS_SELECTOR, ".bbl-FilteredMarketOddsHScroller_RightButton"
                 )[0]
             )
             actions.perform()
@@ -123,12 +134,20 @@ def multi_data(driver):
                 click_on_match_data(driver, selector)
                 time.sleep(3)
             click_on_match_data(driver, selector, i)
+            # headling_one = selector_finder(
+            #     driver, By.CSS_SELECTOR, ".bbw-MarketColumnHeader40Scrolled_Label"
+            # )
+            #
+            # sub_headling_lst = selector_finder(
+            #     driver, By.CSS_SELECTOR, ".bbw-TabSwitcherItem"
+            # )
+
             headling_one = selector_finder(
-                driver, By.CSS_SELECTOR, ".bbw-MarketColumnHeader40Scrolled_Label"
+                driver, By.CSS_SELECTOR, ".bbl-MarketColumnHeader40Scrolled_Label "
             )
 
             sub_headling_lst = selector_finder(
-                driver, By.CSS_SELECTOR, ".bbw-TabSwitcherItem"
+                driver, By.CSS_SELECTOR, ".bbl-TabSwitcherItem_TabText "
             )
             merge_data = []
             for j, value in enumerate(sub_headling_lst):
@@ -139,10 +158,16 @@ def multi_data(driver):
                 if j == 1:
                     time.sleep(3)
                     sub_headling_lst[j].click()
+                    # headling_two = selector_finder(
+                    #     driver,
+                    #     By.CSS_SELECTOR,
+                    #     ".bbw-MarketColumnHeader50Scrolled_Label,.bbw-MarketColumnHeader40Scrolled ",
+                    # )
+                    # breakpoint()
                     headling_two = selector_finder(
                         driver,
                         By.CSS_SELECTOR,
-                        ".bbw-MarketColumnHeader50Scrolled_Label,.bbw-MarketColumnHeader40Scrolled ",
+                        ".bbl-MarketColumnHeader50Scrolled_Label, .bbl-MarketColumnHeader40Scrolled_Label ",
                     )
                     merge_data.append(
                         multi_sub_menu_data(driver, j, headling_two, value)
@@ -160,12 +185,11 @@ def game_data(driver, match_name="", flag=False):
     data = []
     time.sleep(3)
     sub_key = (
-        driver.find_element(
-            By.CSS_SELECTOR, ".gl-MarketGroupContainer > .gl-Market_General-haslabels"
-        )
+        driver.find_element(By.CSS_SELECTOR, ".gl-MarketGroupContainer > .gl-Market_General-haslabels")
         .text.strip()
         .split("\n")
     )
+    time.sleep(3)
     data_value_lst = selector_finder(
         driver,
         By.CSS_SELECTOR,
@@ -183,7 +207,6 @@ def game_data(driver, match_name="", flag=False):
     main_key.extend(
         main_key_value.text.strip() for main_key_value in main_key_value[:3]
     )
-
     for key in main_key:
         index = main_key.index(key)
         values = data[index * len(sub_key) : (index + 1) * len(sub_key)]
@@ -201,7 +224,6 @@ def get_main_market_data(driver, user_range):
     range_data = TOTAL_COUNT // 2
 
     # selector = selector[:range_data] if user_range else selector[range_data:]
-    print(user_range)
     match_name = driver.find_element(
         By.CSS_SELECTOR, ".sph-EventHeader_Label, .sph-EventHeader_HeaderText"
     ).text
@@ -215,7 +237,7 @@ def get_main_market_data(driver, user_range):
             selector, TOTAL_COUNT = get_match_counter(driver)
             # selector = selector[:range_data] if user_range else selector[range_data:]
         click_on_match_data(driver, selector, i)
-        open_new_tab(driver, driver.current_url)
+        open_new_tab(driver, driver.current_url,True)
         match_wise_data, match_key = game_data(driver)
         main_data.append(match_wise_data)
 
@@ -225,10 +247,8 @@ def get_main_market_data(driver, user_range):
             "sph-MarketGroupNavBarButtonNew",
         )
         click_on_match_data(driver, selector)
-        open_new_tab(driver, driver.current_url)
+        open_new_tab(driver, driver.current_url,True)
         multi_market_data.append(multi_data(driver))
-
-        # extra
         driver.execute_script(
             "return arguments[0].scrollIntoView(true);",
             driver.find_element(By.TAG_NAME, "body"),
@@ -239,7 +259,7 @@ def get_main_market_data(driver, user_range):
         action.click(selector)
         action.perform()
 
-        open_new_tab(driver, driver.current_url)
+        open_new_tab(driver, driver.current_url,True)
         main_data[i].get(match_key)["multi_market_data"] = multi_market_data[i]
 
     return match_name, main_data
