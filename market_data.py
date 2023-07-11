@@ -127,7 +127,6 @@ def multi_data(driver):
     multiple_data = []
     group_btn = [btn_txt.text for btn_txt in selector[:2]]
     if "Goalscorer" in group_btn or "Disposals" in group_btn:
-        print(group_btn)
         for i in range(2):
             parent_key = selector[i].text
             if i == 1:
@@ -163,7 +162,6 @@ def multi_data(driver):
                     #     By.CSS_SELECTOR,
                     #     ".bbw-MarketColumnHeader50Scrolled_Label,.bbw-MarketColumnHeader40Scrolled ",
                     # )
-                    # breakpoint()
                     headling_two = selector_finder(
                         driver,
                         By.CSS_SELECTOR,

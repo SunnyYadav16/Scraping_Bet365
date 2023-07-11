@@ -37,7 +37,7 @@ def run_driver(driver_num, queue):
 
         driver = driver_code(driver_num)  # You can use any Selenium WebDriver here
         # Add your automation code for the driver here
-        # breakpoint(e)
+
         # if driver:
         result = {"result_value": []}
         if driver_num == 0:
@@ -47,7 +47,7 @@ def run_driver(driver_num, queue):
         driver.quit()
 
         queue.put(result)
-        # breakpoint()
+
         # else:
         #     driver.quit()# Put the result in the queue
 
@@ -57,9 +57,6 @@ def run_driver(driver_num, queue):
         exception_flag.set()
 
 
-print("running")
-# num_drivers = 1  # Number of drivers you want to run
-
 # threads = []
 result_queue = Queue()  # Create a queue to store the results
 
@@ -68,22 +65,12 @@ result_queue = Queue()  # Create a queue to store the results
 #     threads.append(t)
 #     t.start()
 
-# for thread in threads:
-#     thread.join()
-
 run_driver(1, result_queue)
 
 results = []
 match_name = ""
 match_data = []
 
-# Check if any exception occurred in any of the threads
-# if exception_flag.is_set():
-#     # Perform any necessary cleanup or error handling
-#     print("An exception occurred in one of the threads. Terminating the script.")
-
-# Retrieve the results from the queue
-# else:
 
 while not result_queue.empty():
     result = result_queue.get()

@@ -27,7 +27,7 @@ def driver_code(driver_num):
     ]
 
     options.add_argument("--disable-blink-features=AutomationControlled")
-    # options.add_argument("--headless=new")
+    options.add_argument("--headless=new")
     options.add_argument("--no-sandbox")
     options.add_argument("--disable-dev-shm-usage")
     # options.add_argument(f"--user-data-dir=./profile{driver_num}")
@@ -57,15 +57,12 @@ def driver_code(driver_num):
     driver.get("https://www.bet365.com.au")
 
     driver.set_window_size(390, 844)
-    print("setWindowSize")
 
     # try:
     #     selector=driver.find_element(By.ID, 'msg_ln_1')
     #     return None
-
-
     # except :
-    driver.save_screenshot("/home/ubuntu/Scraping_Bet365/scree.png")
+
     time.sleep(5)
     remove_loader(driver)
     return driver
@@ -92,10 +89,8 @@ def selector_finder(driver, selector_type, selector, flag=False):
 
 
 def open_new_tab(driver, url, flag):
-    print("Opening new tab")
 
     if flag:
-        print("--------------------", url)
         driver.execute_script(
 
             f"""window.open('{url}', "_blank");"""
@@ -104,22 +99,10 @@ def open_new_tab(driver, url, flag):
         driver.execute_script(
             f"""window.open('https://www.bet365.com.au/#/AC/B36/C20856562/D48/E1/F36/', "_blank");"""
         )
-    print(driver.current_url)
-    # https: // www.bet365.com.au /  # /AC/B36/C20856562/D48/E1/F36/
-
-    # driver.find_element(
-    #     By.TAG_NAME,
-    #     "body",
-    # ).send_keys(Keys.CONTROL + "t")
 
     time.sleep(20)
     driver.close()
-    print("Switching to new tab")
     driver.switch_to.window(driver.window_handles[-1])
-    print(driver.current_url)
-    print("Switched to new tab")
-
-    driver.save_screenshot("/home/ubuntu/Scraping_Bet365/screen2-5.png")
 
 
 def click_on_match_data(driver, selector, i=0):
@@ -135,22 +118,16 @@ def remove_cookies(driver):
 
 
 def match_selector(driver):
-    print("match_selector")
-    print("-" * 50)
     time.sleep(10)
-    driver.save_screenshot("/home/ubuntu/Scraping_Bet365/scree.png")
-    print("-" * 50)
     driver.find_element(By.CSS_SELECTOR,".crm-RibbonItemLeague_Afl",).click()
 
     # Open a new tab
     time.sleep(3)
-
     open_new_tab(driver, driver.current_url, False)
 
 
 def get_match_counter(driver):
     time.sleep(2)
-    driver.save_screenshot("/home/ubuntu/Scraping_Bet365/screen1.png")
     return selector_finder(
         driver,
         By.CSS_SELECTOR,
